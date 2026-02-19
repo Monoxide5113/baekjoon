@@ -25,8 +25,8 @@ int main()
     std::cin >> N >> M;
 
     std::vector<std::string> board(N);
-    for (auto& s : board) {
-        std::cin >> s;
+    for (auto& line : board) {
+        std::cin >> line;
     }
 
     int res{8 * 8};
