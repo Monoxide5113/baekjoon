@@ -11,7 +11,7 @@ int main()
     std::cin >> N >> X;
 
     std::vector<int> A(N);
-    for (int& a : A) {
+    for (auto& a : A) {
         std::cin >> a;
     }
 
