@@ -13,9 +13,11 @@ int main()
 
     for (int i{1}, tri{0};; ++i) {
         tri += i;
+
         if (tri > max_tri) {
             break;
         }
+
         tris.push_back(tri);
     }
 
@@ -23,22 +25,22 @@ int main()
 
     const int tri_cnt{static_cast<int>(tris.size())};
     for (int i{0}; i < tri_cnt; ++i) {
-        const int tmp_num1{tris[i] + tris[i] + tris[i]};
-        if (tmp_num1 > max_tri) {
+        if (tris[i] + tris[i] + tris[i] > max_tri) {
             break;
         }
 
         for (int j{i}; j < tri_cnt; ++j) {
-            const int tmp_num2{tris[i] + tris[j] + tris[j]};
-            if (tmp_num2 > max_tri) {
+            if (tris[i] + tris[j] + tris[j] > max_tri) {
                 break;
             }
 
             for (int k{j}; k < tri_cnt; ++k) {
                 const int num{tris[i] + tris[j] + tris[k]};
+
                 if (num > max_tri) {
                     break;
                 }
+
                 nums.set(num);
             }
         }
