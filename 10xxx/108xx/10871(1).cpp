@@ -16,9 +16,11 @@ int main()
     }
 
     for (const auto& a : A) {
-        if (a < X) {
-            std::cout << a << ' ';
+        if (a >= X) {
+            continue;
         }
+
+        std::cout << a << ' ';
     }
     std::cout << '\n';
 

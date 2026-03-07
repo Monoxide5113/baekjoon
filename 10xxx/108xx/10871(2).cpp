@@ -13,9 +13,11 @@ int main()
         int a{};
         std::cin >> a;
 
-        if (a < X) {
-            std::cout << a << ' ';
+        if (a >= X) {
+            continue;
         }
+
+        std::cout << a << ' ';
     }
     std::cout << '\n';
 
