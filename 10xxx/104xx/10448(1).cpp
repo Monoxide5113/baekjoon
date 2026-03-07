@@ -11,8 +11,7 @@ int main()
 
     std::vector<int> tris;
 
-    int tri{0};
-    for (int i{1};; ++i) {
+    for (int i{1}, tri{0};; ++i) {
         tri += i;
         if (tri > max_tri) {
             break;
