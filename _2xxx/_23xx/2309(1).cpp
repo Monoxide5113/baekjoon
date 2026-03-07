@@ -5,6 +5,7 @@
 #include <utility>
 
 constexpr int dwarf_cnt{9};
+
 constexpr int real_sum{100};
 
 std::pair<int, int> find_fake_dwarfs(const std::array<int, dwarf_cnt>& dwarfs)
@@ -14,11 +15,14 @@ std::pair<int, int> find_fake_dwarfs(const std::array<int, dwarf_cnt>& dwarfs)
 
     for (int i{0}; i < dwarf_cnt - 1; ++i) {
         for (int j{i + 1}; j < dwarf_cnt; ++j) {
-            if (dwarfs[i] + dwarfs[j] == fake_sum) {
-                return {dwarfs[i], dwarfs[j]};
+            if (dwarfs[i] + dwarfs[j] != fake_sum) {
+                continue;
             }
+
+            return {dwarfs[i], dwarfs[j]};
         }
     }
+
     return {-1, -1};
 }
 
@@ -36,9 +40,11 @@ int main()
 
     std::sort(dwarfs.begin(), dwarfs.end());
     for (const auto& dwarf : dwarfs) {
-        if (dwarf != fake1 && dwarf != fake2) {
-            std::cout << dwarf << '\n';
+        if (dwarf == fake1 || dwarf == fake2) {
+            continue;
         }
+
+        std::cout << dwarf << '\n';
     }
 
     return 0;

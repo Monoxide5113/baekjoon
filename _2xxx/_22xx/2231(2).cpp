@@ -1,6 +1,28 @@
 #include <algorithm>
 #include <iostream>
 
+int get_digit_cnt(int num)
+{
+    int ret{0};
+
+    for (int tmp{num}; tmp > 0; tmp /= 10) {
+        ++ret;
+    }
+
+    return ret;
+}
+
+int get_digit_sum(int num)
+{
+    int ret{0};
+
+    for (int tmp{num}; tmp > 0; tmp /= 10) {
+        ret += tmp % 10;
+    }
+
+    return ret;
+}
+
 int main()
 {
     std::ios::sync_with_stdio(false);
@@ -9,22 +31,14 @@ int main()
     int N{};
     std::cin >> N;
 
-    int digit_cnt{0};
-    for (int temp{N}; temp > 0; temp /= 10) {
-        digit_cnt++;
-    }
-
     int res{0};
-    for (int i{std::max(1, N - (digit_cnt * 9))}; i <= N; ++i) {
-        int digit_sum{0};
-        for (int temp{i}; temp > 0; temp /= 10) {
-            digit_sum += temp % 10;
+    for (int i{std::max(1, N - (get_digit_cnt(N) * 9))}; i <= N; ++i) {
+        if (i + get_digit_sum(i) != N) {
+            continue;
         }
 
-        if (i + digit_sum == N) {
-            res = i;
-            break;
-        }
+        res = i;
+        break;
     }
 
     std::cout << res << '\n';

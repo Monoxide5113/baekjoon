@@ -1,5 +1,16 @@
 #include <iostream>
 
+int get_digit_sum(int num)
+{
+    int ret{0};
+
+    for (int tmp{num}; tmp > 0; tmp /= 10) {
+        ret += tmp % 10;
+    }
+
+    return ret;
+}
+
 int main()
 {
     std::ios::sync_with_stdio(false);
@@ -10,15 +21,12 @@ int main()
 
     int res{0};
     for (int i{1}; i <= N; ++i) {
-        int digit_sum{0};
-        for (int temp{i}; temp > 0; temp /= 10) {
-            digit_sum += temp % 10;
+        if (i + get_digit_sum(i) != N) {
+            continue;
         }
 
-        if (i + digit_sum == N) {
-            res = i;
-            break;
-        }
+        res = i;
+        break;
     }
 
     std::cout << res << '\n';
