@@ -19,7 +19,7 @@ int main()
             continue;
         }
 
-        ans.set(i, true);
+        ans.set(i);
     }
 
     int N{};
