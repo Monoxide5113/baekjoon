@@ -6,7 +6,14 @@
 constexpr char white{'W'};
 constexpr char black{'B'};
 
-constexpr int len{8};
+char get_valid_color(int row, int col)
+{
+    if ((row + col) % 2 == 0) {
+        return white;
+    }
+
+    return black;
+}
 
 int main()
 {
@@ -22,18 +29,17 @@ int main()
         std::cin >> s;
     }
 
-    int res{len * len};
+    int res{8 * 8};
 
-    for (int i{0}; i <= N - len; ++i) {
-        for (int j{0}; j <= M - len; ++j) {
+    for (int i{0}; i <= N - 8; ++i) {
+        for (int j{0}; j <= M - 8; ++j) {
             int cnt{0};
 
-            for (int k{0}; k < len; ++k) {
-                for (int l{0}; l < len; ++l) {
-                    if ((k + l) % 2 == 0 && board[i + k][j + l] != white) {
-                        continue;
-                    }
-                    if ((k + l) % 2 != 0 && board[i + k][j + l] != black) {
+            for (int k{0}; k < 8; ++k) {
+                for (int l{0}; l < 8; ++l) {
+                    const auto color{get_valid_color(k, l)};
+
+                    if (board[i + k][j + l] != color) {
                         continue;
                     }
 
@@ -41,7 +47,7 @@ int main()
                 }
             }
 
-            res = std::min({res, cnt, (len * len) - cnt});
+            res = std::min({res, cnt, (8 * 8) - cnt});
         }
     }
 
