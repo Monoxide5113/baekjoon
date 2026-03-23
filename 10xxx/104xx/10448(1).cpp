@@ -11,8 +11,8 @@ int main()
 
     std::vector<int> tris;
 
-    for (int i{1}, tri{0};; ++i) {
-        tri += i;
+    for (int i{1};; ++i) {
+        const int tri{(i * (i + 1)) / 2};
 
         if (tri > max_tri) {
             break;
@@ -23,19 +23,18 @@ int main()
 
     std::bitset<max_tri + 1> nums;
 
-    const int tri_cnt{static_cast<int>(tris.size())};
-    for (int i{0}; i < tri_cnt; ++i) {
-        if (tris[i] + tris[i] + tris[i] > max_tri) {
+    for (auto it1{tris.cbegin()}; it1 != tris.cend(); ++it1) {
+        if (*it1 + *it1 + *it1 > max_tri) {
             break;
         }
 
-        for (int j{i}; j < tri_cnt; ++j) {
-            if (tris[i] + tris[j] + tris[j] > max_tri) {
+        for (auto it2{it1}; it2 != tris.cend(); ++it2) {
+            if (*it1 + *it2 + *it2 > max_tri) {
                 break;
             }
 
-            for (int k{j}; k < tri_cnt; ++k) {
-                const int num{tris[i] + tris[j] + tris[k]};
+            for (auto it3{it2}; it3 != tris.cend(); ++it3) {
+                const int num{*it1 + *it2 + *it3};
 
                 if (num > max_tri) {
                     break;
