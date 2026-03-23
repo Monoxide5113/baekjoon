@@ -3,22 +3,24 @@
 #include <string>
 #include <vector>
 
-int get_max_candy(const std::vector<std::string>& board, int N, int row_start,
-                  int row_end, int col_start, int col_end)
+using Board = std::vector<std::string>;
+
+int get_max_candy(const Board& board, int row_start, int row_end, int col_start,
+                  int col_end)
 {
     int ret{1};
 
+    const int N{static_cast<int>(board.size())};
     for (int i{row_start}; i <= row_end; ++i) {
         int row_cnt{1};
 
         for (int j{0}; j < N - 1; ++j) {
-            if (board[i][j] == board[i][j + 1]) {
-                ++row_cnt;
-            }
-            else {
+            if (board[i][j] != board[i][j + 1]) {
                 row_cnt = 1;
+                continue;
             }
 
+            ++row_cnt;
             ret = std::max(ret, row_cnt);
         }
     }
@@ -27,13 +29,12 @@ int get_max_candy(const std::vector<std::string>& board, int N, int row_start,
         int col_cnt{1};
 
         for (int j{0}; j < N - 1; ++j) {
-            if (board[j][i] == board[j + 1][i]) {
-                ++col_cnt;
-            }
-            else {
+            if (board[j][i] != board[j + 1][i]) {
                 col_cnt = 1;
+                continue;
             }
 
+            ++col_cnt;
             ret = std::max(ret, col_cnt);
         }
     }
@@ -49,30 +50,34 @@ int main()
     int N{};
     std::cin >> N;
 
-    std::vector<std::string> board(N);
-    for (auto& s : board) {
-        std::cin >> s;
+    Board board(N);
+    for (auto& line : board) {
+        std::cin >> line;
     }
 
-    int res{get_max_candy(board, N, 0, N - 1, 0, N - 1)};
+    int res{get_max_candy(board, 0, N - 1, 0, N - 1)};
 
     for (int i{0}; i < N; ++i) {
         for (int j{0}; j < N - 1; ++j) {
-            if (board[i][j] != board[i][j + 1]) {
-                std::swap(board[i][j], board[i][j + 1]);
-                res = std::max(res, get_max_candy(board, N, i, i, j, j + 1));
-                std::swap(board[i][j], board[i][j + 1]);
+            if (board[i][j] == board[i][j + 1]) {
+                continue;
             }
+
+            std::swap(board[i][j], board[i][j + 1]);
+            res = std::max(res, get_max_candy(board, i, i, j, j + 1));
+            std::swap(board[i][j], board[i][j + 1]);
         }
     }
 
     for (int i{0}; i < N; ++i) {
         for (int j{0}; j < N - 1; ++j) {
-            if (board[j][i] != board[j + 1][i]) {
-                std::swap(board[j][i], board[j + 1][i]);
-                res = std::max(res, get_max_candy(board, N, j, j + 1, i, i));
-                std::swap(board[j][i], board[j + 1][i]);
+            if (board[j][i] == board[j + 1][i]) {
+                continue;
             }
+
+            std::swap(board[j][i], board[j + 1][i]);
+            res = std::max(res, get_max_candy(board, j, j + 1, i, i));
+            std::swap(board[j][i], board[j + 1][i]);
         }
     }
 
