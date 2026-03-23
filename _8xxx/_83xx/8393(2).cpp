@@ -8,7 +8,7 @@ int main()
     int n{};
     std::cin >> n;
 
-    const int res{n * (n + 1) / 2};
+    const int res{(n * (n + 1)) / 2};
 
     std::cout << res << '\n';
 
