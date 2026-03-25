@@ -13,14 +13,16 @@ int main()
     std::cin >> N >> K;
 
     std::vector<int> sensors(N);
-    for (auto& sensor : sensors)
+    for (auto& sensor : sensors) {
         std::cin >> sensor;
+    }
 
     std::sort(sensors.begin(), sensors.end());
 
     std::vector<int> diffs(N - 1);
-    for (int i{0}; i < N - 1; ++i)
+    for (int i{0}; i < N - 1; ++i) {
         diffs[i] = sensors[i + 1] - sensors[i];
+    }
 
     std::sort(diffs.begin(), diffs.end());
 
