@@ -4,7 +4,6 @@
 #include <vector>
 
 constexpr int problem_cnt{11};
-
 constexpr int penalty{20};
 
 int main()
