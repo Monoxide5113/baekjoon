@@ -36,7 +36,7 @@ int main()
         }
 
         auto target_it{multitap.begin()};
-        auto last_use_it{it1};
+        auto farthest_use_it{it1};
         for (auto it2{multitap.begin()}; it2 != multitap.end(); ++it2) {
             const auto next_use_it{
                 std::find(it1 + 1, device_schedule.cend(), *it2)};
@@ -46,8 +46,8 @@ int main()
                 break;
             }
 
-            if (next_use_it > last_use_it) {
-                last_use_it = next_use_it;
+            if (next_use_it > farthest_use_it) {
+                farthest_use_it = next_use_it;
                 target_it = it2;
             }
         }
