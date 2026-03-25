@@ -12,22 +12,22 @@ int main()
     std::cin >> N >> K;
 
     std::vector<int> coins(N);
-    for (auto& c : coins) {
-        std::cin >> c;
+    for (auto& coin : coins) {
+        std::cin >> coin;
     }
 
     std::reverse(coins.begin(), coins.end());
 
     int res{0};
     int remain_amount{K};
-    for (const auto& c : coins) {
+    for (const auto& coin : coins) {
         if (remain_amount == 0) {
             break;
         }
 
-        while (remain_amount >= c) {
+        while (remain_amount >= coin) {
             ++res;
-            remain_amount -= c;
+            remain_amount -= coin;
         }
     }
 

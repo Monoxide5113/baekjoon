@@ -12,8 +12,8 @@ int main()
     std::cin >> N >> L;
 
     std::vector<int> poses(N);
-    for (auto& p : poses) {
-        std::cin >> p;
+    for (auto& pos : poses) {
+        std::cin >> pos;
     }
 
     std::sort(poses.begin(), poses.end());
