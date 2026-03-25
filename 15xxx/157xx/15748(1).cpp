@@ -19,12 +19,14 @@ int main()
         std::cin >> x >> c;
     }
 
-    std::sort(rest_stops.begin(), rest_stops.end(), std::greater<>());
+    std::sort(rest_stops.begin(), rest_stops.end(), [](auto a, auto b) {
+        return a.second > b.second;
+    });
 
     long long res{0};
     int last_rest_stop{0};
     const long long diff{r_F - r_B};
-    for (const auto [c, x] : rest_stops) {
+    for (const auto& [x, c] : rest_stops) {
         if (x <= last_rest_stop) {
             continue;
         }
